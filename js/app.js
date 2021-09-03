@@ -10,8 +10,17 @@ const loadData = () => {
         .then(res => res.json())
         .then(data => {
             const p = document.getElementById('result-number');
-            p.innerText = `Total Result Found ${data.numFound}`;
-            displayData(data.docs);
+            if (data.numFound > 0) {
+
+                p.innerText = `Total Result Found ${data.numFound}`;
+                displayData(data.docs);
+
+            }
+            else {
+                p.innerText = `No Result Found`;
+                const searchResultContainer = document.getElementById("book-container");
+                searchResultContainer.innerHTML = "";
+            }
         })
 
 
@@ -39,7 +48,7 @@ const displayData = (books) => {
 
         // setting up cover image
         const imageId = book.cover_i;
-        console.log(imageId);
+
         let coverUrl;
         if (imageId === undefined) {
 
