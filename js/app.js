@@ -23,9 +23,7 @@ const displayData = (books) => {
     searchResultContainer.innerHTML = "";
 
     books.forEach(book => {
-        console.log(book);
-        console.log(book.author_name);
-        console.log("year type ", typeof book.first_publish_year);
+
         // if author name not found in server
         if (book.author_name === undefined) {
             book.author_name = "";
@@ -41,8 +39,18 @@ const displayData = (books) => {
 
         // setting up cover image
         const imageId = book.cover_i;
+        console.log(imageId);
+        let coverUrl;
+        if (imageId === undefined) {
 
-        const coverUrl = `https://covers.openlibrary.org/b/id/${imageId}-M.jpg`;
+            coverUrl = "https://covers.openlibrary.org/b/id/10909258-M.jpg";
+
+        }
+        else {
+            coverUrl = `https://covers.openlibrary.org/b/id/${imageId}-M.jpg`;
+        }
+
+
 
 
 
@@ -51,7 +59,7 @@ const displayData = (books) => {
         const div = document.createElement("div");
         div.classList.add("col");
         div.innerHTML = ` <div class="card">
-         <img src="${coverUrl}" class="card-img-top img-fluid" alt="...">
+         <img src="${coverUrl}" class="card-img-top img-fluid" alt='not image' >
         <div class="card-body">
             <h5 class="card-title">${book.title.slice(0, 50)}</h5>
             <p class="card-text">${book.author_name.slice(0, 150)}</p>
